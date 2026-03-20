@@ -185,26 +185,26 @@
 <section class="stats-section">
     <div class="container">
         <div class="row g-4 text-center">
-            <div class="col-6 col-lg-3" data-aos="fade-up">
+            <div class="col-12 col-lg-3" data-aos="fade-up">
                 <div class="stat-item">
                     <span class="stat-number" data-count="{{ setting('stats_years','15') }}">0</span>
                     <div class="stat-label">Years of Experience</div>
                 </div>
             </div>
-            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-12 col-lg-3" data-aos="fade-up" data-aos-delay="100">
                 <div class="stat-item">
                     <span class="stat-number" data-count="{{ setting('stats_workers','2000') }}">0</span>
                     <div class="stat-label">Company Workers</div>
                 </div>
             </div>
-            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-12 col-lg-3" data-aos="fade-up" data-aos-delay="200">
                 <div class="stat-item">
                     <span class="stat-number" data-count="{{ setting('stats_shipments','50') }}">0</span>
                     <span style="font-size:40px;color:var(--accent);font-weight:800">k</span>
                     <div class="stat-label">Monthly Shipments</div>
                 </div>
             </div>
-            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-12 col-lg-3" data-aos="fade-up" data-aos-delay="300">
                 <div class="stat-item">
                     <span class="stat-number" data-count="{{ setting('stats_customers','98') }}">0</span>
                     <span style="font-size:40px;color:var(--accent);font-weight:800">%</span>

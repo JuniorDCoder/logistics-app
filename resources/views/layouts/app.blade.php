@@ -41,12 +41,16 @@
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Barlow', sans-serif;
             font-size: 16px;
             color: #2d3748;
             background: #fff;
-            overflow-x: hidden;
         }
 
         h1,h2,h3,h4,h5,h6 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; }
@@ -373,6 +377,17 @@
                 padding: 11px 14px !important;
                 border-radius: 8px;
                 letter-spacing: .2px;
+            }
+
+            .alert-float {
+                left: 12px;
+                right: 12px;
+                min-width: 0;
+                max-width: none;
+            }
+
+            .hero-badge {
+                max-width: calc(100vw - 30px);
             }
         }
     </style>

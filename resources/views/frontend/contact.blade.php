@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-600">Phone Number</label>
-                                <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" placeholder="+1 234 567 8900">
+                                <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" placeholder="">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-600">Subject</label>
