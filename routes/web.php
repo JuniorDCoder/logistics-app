@@ -24,6 +24,7 @@ Route::post('/contact',[HomeController::class, 'contactSubmit'])->name('contact.
 // Track & Trace
 Route::get('/track-shipment',  [TrackingController::class, 'index'])->name('track');
 Route::post('/track-shipment', [TrackingController::class, 'track'])->name('track.search');
+Route::get('/track', fn () => redirect()->route('track'))->name('track.legacy');
 
 // ─── Admin Auth ───────────────────────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->group(function () {
