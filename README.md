@@ -250,4 +250,3 @@ Admin → Shipments → click any shipment → use "Add Tracking Event" form on 
 
 ## 📝 License
 MIT — Free to use and modify.
-# logistics-app
