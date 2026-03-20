@@ -123,9 +123,10 @@
             background: var(--accent);
             color: var(--dark) !important;
             border-radius: 6px;
-            padding: 7px 16px !important;
+            padding: 9px 14px !important;
             font-weight: 700 !important;
             margin-left: 8px;
+            margin-bottom: 3px;
             line-height: 1.2;
             display: inline-flex;
             align-items: center;
@@ -364,7 +365,15 @@
         @media (max-width: 991px) {
             .navbar-nav .nav-link { padding: 12px 0 !important; }
             .navbar-nav .nav-link::after { display: none; }
-            .btn-track { margin-left: 0; margin-top: 8px; }
+            .btn-track {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                justify-content: center;
+                padding: 11px 14px !important;
+                border-radius: 8px;
+                letter-spacing: .2px;
+            }
         }
     </style>
 
