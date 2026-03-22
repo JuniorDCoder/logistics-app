@@ -136,6 +136,77 @@
     font-size: 13px;
     color: var(--gray);
 }
+
+.details-stack {
+    display: grid;
+    gap: 16px;
+}
+
+.tracking-detail-card {
+    background: linear-gradient(145deg, #f6fcf7 0%, #eef8f0 100%);
+    border: 1px solid #d8eadc;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 8px 24px rgba(26, 93, 58, 0.08);
+}
+
+.detail-card-head {
+    margin: -22px -22px 14px;
+    padding: 14px 16px 12px;
+    background: linear-gradient(135deg, #d8f0de 0%, #cde8d4 100%);
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.detail-card-head h6 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1f6b45;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.detail-card-separator {
+    margin-top: 10px;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, rgba(31, 107, 69, 0.45), rgba(31, 107, 69, 0.12));
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 14px;
+}
+
+.detail-item-label {
+    font-size: 11px;
+    color: #4f6f59;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 3px;
+}
+
+.detail-item-value {
+    font-size: 14px;
+    color: #143423;
+    font-weight: 600;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+@media (max-width: 991.98px) {
+    .details-stack {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 @endpush
 
@@ -228,34 +299,74 @@
             </div>
 
             <div class="row g-4">
-                <!-- Info Cards -->
+                <!-- Sender / Receiver / Shipment cards -->
                 <div class="col-lg-4">
-                    <div class="track-info-card mb-4">
-                        <div class="label"><i class="fas fa-route me-1"></i>Route</div>
-                        <div class="value mt-2">
-                            <div><i class="fas fa-map-marker me-2" style="color:var(--accent)"></i>{{ $shipment->origin }}</div>
-                            <div style="margin:8px 0;border-left:2px solid rgba(255,255,255,.2);padding-left:18px;color:rgba(255,255,255,.6);font-size:13px">via {{ \App\Models\Shipment::SERVICE_TYPES[$shipment->service_type] ?? $shipment->service_type }}</div>
-                            <div><i class="fas fa-flag-checkered me-2" style="color:var(--accent)"></i>{{ $shipment->destination }}</div>
-                        </div>
-                    </div>
-
-                    <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:var(--shadow)">
-                        <h6 style="font-size:14px;font-weight:700;color:var(--dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px">Shipment Details</h6>
-                        <div class="row g-2">
-                            @foreach([
-                                ['Service',   \App\Models\Shipment::SERVICE_TYPES[$shipment->service_type] ?? $shipment->service_type],
-                                ['Sender',    $shipment->sender_name],
-                                ['Receiver',  $shipment->receiver_name],
-                                ['Packages',  $shipment->package_count.' pcs'],
-                                ['Weight',    $shipment->weight ? $shipment->weight.' kg' : '—'],
-                                ['Est. Delivery', $shipment->estimated_delivery ? $shipment->estimated_delivery->format('M d, Y') : '—'],
-                            ] as $row)
-                            <div class="col-6">
-                                <div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.5px">{{ $row[0] }}</div>
-                                <div style="font-size:14px;font-weight:600;color:var(--dark)">{{ $row[1] }}</div>
+                    <div class="details-stack">
+                        <article class="tracking-detail-card">
+                            <div class="detail-card-head">
+                                <h6><i class="fas fa-user-circle me-2"></i>Sender Details</h6>
+                                <div class="detail-card-separator"></div>
                             </div>
-                            @endforeach
-                        </div>
+                            <div class="detail-grid">
+                                @foreach([
+                                    ['Name', $shipment->sender_name],
+                                    ['Email', $shipment->sender_email ?: 'Not provided'],
+                                    ['Phone', $shipment->sender_phone ?: 'Not provided'],
+                                    ['Address', $shipment->sender_address ?: 'Not provided'],
+                                ] as $row)
+                                <div>
+                                    <div class="detail-item-label">{{ $row[0] }}</div>
+                                    <div class="detail-item-value">{{ $row[1] }}</div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </article>
+
+                        <article class="tracking-detail-card">
+                            <div class="detail-card-head">
+                                <h6><i class="fas fa-user-check me-2"></i>Receiver Details</h6>
+                                <div class="detail-card-separator"></div>
+                            </div>
+                            <div class="detail-grid">
+                                @foreach([
+                                    ['Name', $shipment->receiver_name],
+                                    ['Email', $shipment->receiver_email ?: 'Not provided'],
+                                    ['Phone', $shipment->receiver_phone ?: 'Not provided'],
+                                    ['Address', $shipment->receiver_address ?: 'Not provided'],
+                                ] as $row)
+                                <div>
+                                    <div class="detail-item-label">{{ $row[0] }}</div>
+                                    <div class="detail-item-value">{{ $row[1] }}</div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </article>
+
+                        <article class="tracking-detail-card">
+                            <div class="detail-card-head">
+                                <h6><i class="fas fa-box-open me-2"></i>Shipment Details</h6>
+                                <div class="detail-card-separator"></div>
+                            </div>
+                            <div class="detail-grid">
+                                @foreach([
+                                    ['Service', \App\Models\Shipment::SERVICE_TYPES[$shipment->service_type] ?? $shipment->service_type],
+                                    ['Status', $shipment->status_label],
+                                    ['Origin', $shipment->origin],
+                                    ['Destination', $shipment->destination],
+                                    ['Packages', $shipment->package_count.' pcs'],
+                                    ['Weight', $shipment->weight ? $shipment->weight.' kg' : 'Not provided'],
+                                    ['Dimensions', $shipment->dimensions ?: 'Not provided'],
+                                    ['Declared Value', $shipment->declared_value ? '$'.number_format((float) $shipment->declared_value, 2) : 'Not provided'],
+                                    ['Estimated Delivery', $shipment->estimated_delivery ? $shipment->estimated_delivery->format('M d, Y') : 'Not available'],
+                                    ['Description', $shipment->description ?: 'Not provided'],
+                                ] as $row)
+                                <div>
+                                    <div class="detail-item-label">{{ $row[0] }}</div>
+                                    <div class="detail-item-value">{{ $row[1] }}</div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </article>
                     </div>
                 </div>
 
