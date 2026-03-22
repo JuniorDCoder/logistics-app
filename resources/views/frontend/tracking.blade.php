@@ -395,7 +395,7 @@
                                     ['Weight', $shipment->weight ? $shipment->weight.' kg' : 'Not provided'],
                                     ['Dimensions', $shipment->dimensions ?: 'Not provided'],
                                     ['Declared Value', $shipment->declared_value ? '$'.number_format((float) $shipment->declared_value, 2) : 'Not provided'],
-                                    ['Estimated Delivery', $shipment->estimated_delivery ? $shipment->estimated_delivery->format('M d, Y') : 'Not available'],
+                                    ['Estimated Delivery Time', $shipment->estimated_delivery ? $shipment->estimated_delivery->format('M d, Y') : 'Not available'],
                                     ['Description', $shipment->description ?: 'Not provided'],
                                 ] as $row)
                                 <div>
