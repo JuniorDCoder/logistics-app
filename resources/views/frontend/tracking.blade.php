@@ -153,7 +153,7 @@
 .detail-card-head {
     margin: -22px -22px 14px;
     padding: 14px 16px 12px;
-    background: linear-gradient(135deg, #d8f0de 0%, #cde8d4 100%);
+    background: linear-gradient(135deg, #cce0d1 0%, #91d1a2 100%);
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
 }
@@ -202,9 +202,48 @@
     }
 }
 
+@media (max-width: 767.98px) {
+    .details-stack .tracking-detail-card .detail-card-head h6 {
+        font-size: 18px !important;
+    }
+
+    .details-stack .tracking-detail-card .detail-item-label {
+        font-size: 14px !important;
+    }
+
+    .details-stack .tracking-detail-card .detail-item-value {
+        font-size: 20px !important;
+        line-height: 1.55 !important;
+    }
+}
+
 @media (max-width: 575.98px) {
+    .tracking-detail-card {
+        padding: 24px;
+    }
+
+    .detail-card-head {
+        margin: -24px -24px 16px;
+        padding: 15px 18px 13px;
+    }
+
+    .details-stack .tracking-detail-card .detail-card-head h6 {
+        font-size: 18px !important;
+    }
+
     .detail-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .details-stack .tracking-detail-card .detail-item-label {
+        font-size: 14px !important;
+        margin-bottom: 5px;
+    }
+
+    .details-stack .tracking-detail-card .detail-item-value {
+        font-size: 20px !important;
+        line-height: 1.55 !important;
     }
 }
 </style>
@@ -311,7 +350,6 @@
                                 @foreach([
                                     ['Name', $shipment->sender_name],
                                     ['Email', $shipment->sender_email ?: 'Not provided'],
-                                    ['Phone', $shipment->sender_phone ?: 'Not provided'],
                                     ['Address', $shipment->sender_address ?: 'Not provided'],
                                 ] as $row)
                                 <div>
