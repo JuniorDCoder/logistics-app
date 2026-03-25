@@ -55,16 +55,31 @@ class HomeController extends Controller
 
         $contactMessage = ContactMessage::create($request->only(['name', 'email', 'phone', 'subject', 'message']));
 
-        $adminEmail = trim((string) setting('contact_email', ''));
-        if ($adminEmail !== '' && filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+        $rawRecipients = [
+            (string) config('mail.admin.address', ''),
+            (string) setting('contact_email', ''),
+        ];
+
+        $adminRecipients = collect($rawRecipients)
+            ->map(fn ($email) => trim((string) $email))
+            ->filter(fn ($email) => $email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL))
+            ->unique()
+            ->values()
+            ->all();
+
+        if (count($adminRecipients) > 0) {
             try {
-                Mail::to($adminEmail)->send(new ContactMessageNotification($contactMessage));
+                Mail::to($adminRecipients)->send(new ContactMessageNotification($contactMessage));
             } catch (\Throwable $exception) {
                 Log::warning('Failed to send contact notification email.', [
-                    'admin_email' => $adminEmail,
+                    'admin_recipients' => $adminRecipients,
                     'error' => $exception->getMessage(),
                 ]);
             }
+        } else {
+            Log::info('Contact message saved but no admin recipient configured for notification email.', [
+                'contact_message_id' => $contactMessage->id,
+            ]);
         }
 
         return back()->with('success', 'Thank you! Your message has been received. We will get back to you shortly.');

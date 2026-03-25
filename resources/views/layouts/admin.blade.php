@@ -123,6 +123,7 @@
 
         /* Table */
         .admin-table { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+        .admin-table-scroll { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; width: 100%; }
         .admin-table table { margin: 0; }
         .admin-table thead th { background: var(--dark); color: #fff; font-weight: 600; font-size: 13px; letter-spacing: .4px; border: none; padding: 14px 16px; }
         .admin-table tbody td { padding: 13px 16px; vertical-align: middle; border-color: #f0f2f8; font-size: 14px; }

@@ -11,6 +11,10 @@
     <p style="margin: 4px 0;"><strong>Name:</strong> {{ $contactMessage->name }}</p>
     <p style="margin: 4px 0;"><strong>Email:</strong> {{ $contactMessage->email }}</p>
 
+    @if(!empty($contactMessage->created_at))
+        <p style="margin: 4px 0;"><strong>Submitted:</strong> {{ $contactMessage->created_at->format('Y-m-d H:i:s') }}</p>
+    @endif
+
     @if(!empty($contactMessage->phone))
         <p style="margin: 4px 0;"><strong>Phone:</strong> {{ $contactMessage->phone }}</p>
     @endif

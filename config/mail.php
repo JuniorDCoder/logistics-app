@@ -55,6 +55,19 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Recipient
+    |--------------------------------------------------------------------------
+    |
+    | Used for internal notifications such as contact form submissions.
+    |
+    */
+    'admin' => [
+        'address' => env('MAIL_ADMIN_ADDRESS', env('ADMIN_EMAIL')),
+        'name' => env('MAIL_ADMIN_NAME', env('MAIL_FROM_NAME', 'Admin')),
+    ],
+
     'markdown' => [
         'theme' => 'default',
 

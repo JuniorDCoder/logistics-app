@@ -39,22 +39,24 @@
                 <h6 style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:#0d1b2a;margin:0">Recent Shipments</h6>
                 <a href="{{ route('admin.shipments.index') }}" style="font-size:13px;color:var(--primary);font-weight:600;text-decoration:none">View All →</a>
             </div>
-            <table class="table mb-0">
-                <thead><tr><th>Tracking #</th><th>Sender</th><th>Destination</th><th>Status</th><th>Date</th></tr></thead>
-                <tbody>
-                    @forelse($recent_shipments as $s)
-                    <tr>
-                        <td><a href="{{ route('admin.shipments.show',$s) }}" style="color:var(--primary);font-weight:700;font-family:'Barlow Condensed',sans-serif">{{ $s->tracking_number }}</a></td>
-                        <td>{{ $s->sender_name }}</td>
-                        <td>{{ $s->destination }}</td>
-                        <td><span class="badge badge-status bg-{{ $s->status_color }}">{{ $s->status_label }}</span></td>
-                        <td style="color:#6c757d;font-size:13px">{{ $s->created_at->format('M d, Y') }}</td>
-                    </tr>
-                    @empty
-                    <tr><td colspan="5" class="text-center py-4 text-muted">No shipments yet</td></tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <div class="admin-table-scroll">
+                <table class="table mb-0">
+                    <thead><tr><th>Tracking #</th><th>Sender</th><th>Destination</th><th>Status</th><th>Date</th></tr></thead>
+                    <tbody>
+                        @forelse($recent_shipments as $s)
+                        <tr>
+                            <td><a href="{{ route('admin.shipments.show',$s) }}" style="color:var(--primary);font-weight:700;font-family:'Barlow Condensed',sans-serif">{{ $s->tracking_number }}</a></td>
+                            <td>{{ $s->sender_name }}</td>
+                            <td>{{ $s->destination }}</td>
+                            <td><span class="badge badge-status bg-{{ $s->status_color }}">{{ $s->status_label }}</span></td>
+                            <td style="color:#6c757d;font-size:13px">{{ $s->created_at->format('M d, Y') }}</td>
+                        </tr>
+                        @empty
+                        <tr><td colspan="5" class="text-center py-4 text-muted">No shipments yet</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

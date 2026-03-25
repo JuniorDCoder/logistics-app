@@ -25,6 +25,7 @@ class ContactMessageNotification extends Mailable
             : 'New Contact Inquiry from '.$this->contactMessage->name;
 
         return $this->subject($subjectLine)
+            ->replyTo($this->contactMessage->email, $this->contactMessage->name)
             ->view('emails.contact-message-notification');
     }
 }
