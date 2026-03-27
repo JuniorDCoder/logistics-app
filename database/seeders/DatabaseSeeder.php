@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             ['key'=>'app_name',        'value'=>'IntertransitLogistics', 'group'=>'general',  'type'=>'text',     'label'=>'Application Name'],
             ['key'=>'tagline',         'value'=>'Professional Logistics Services with Seamless Process', 'group'=>'general', 'type'=>'text', 'label'=>'Tagline'],
             ['key'=>'contact_email',   'value'=>'support@intertransitlogistics.org', 'group'=>'general', 'type'=>'text', 'label'=>'Contact Email'],
+            ['key'=>'notification_email', 'value'=>'support@intertransitlogistics.org', 'group'=>'general', 'type'=>'text', 'label'=>'Notification Email'],
             ['key'=>'contact_phone',   'value'=>'+1 (800) 555-0100', 'group'=>'general', 'type'=>'text', 'label'=>'Contact Phone'],
             ['key'=>'contact_address', 'value'=>'123 Logistics Ave, Sydney, Australia', 'group'=>'general', 'type'=>'text', 'label'=>'Address'],
             ['key'=>'office_hours',    'value'=>'Mon-Sat: 08:00am - 10:00pm', 'group'=>'general', 'type'=>'text', 'label'=>'Office Hours'],

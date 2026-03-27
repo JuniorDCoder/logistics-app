@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
+    private const SETTING_META = [
+        'notification_email' => [
+            'group' => 'general',
+            'type' => 'text',
+            'label' => 'Notification Email',
+        ],
+    ];
+
     public function index()
     {
         $groups = ['general', 'social', 'homepage', 'seo'];
@@ -21,10 +29,21 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'contact_email' => ['nullable', 'email'],
+            'notification_email' => ['nullable', 'email'],
+            'logo_file' => ['nullable', 'image'],
+        ]);
+
         $data = $request->except(['_token', '_method']);
 
         foreach ($data as $key => $value) {
-            Setting::setValue($key, $value);
+            Setting::updateOrCreate(
+                ['key' => $key],
+                array_merge(self::SETTING_META[$key] ?? [], ['value' => $value])
+            );
+
+            Cache::forget("setting_{$key}");
         }
 
         // Handle logo upload

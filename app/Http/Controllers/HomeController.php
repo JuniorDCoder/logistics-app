@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\Testimonial;
 use App\Models\TeamMember;
 use App\Models\ContactMessage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -55,13 +56,18 @@ class HomeController extends Controller
 
         $contactMessage = ContactMessage::create($request->only(['name', 'email', 'phone', 'subject', 'message']));
 
-        $rawRecipients = [
+        $adminRecipients = collect([
+            (string) setting('notification_email', ''),
             (string) config('mail.admin.address', ''),
-            (string) setting('contact_email', ''),
-        ];
-
-        $adminRecipients = collect($rawRecipients)
-            ->map(fn ($email) => trim((string) $email))
+        ])
+            ->merge(
+                User::query()
+                    ->where('is_admin', true)
+                    ->pluck('email')
+                    ->all()
+            )
+            ->push((string) setting('contact_email', ''))
+            ->map(fn ($email) => strtolower(trim((string) $email)))
             ->filter(fn ($email) => $email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL))
             ->unique()
             ->values()

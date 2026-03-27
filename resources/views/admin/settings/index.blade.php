@@ -35,6 +35,17 @@
                     <div class="col-md-6">
                         <label class="form-label">Contact Email</label>
                         <input type="email" name="contact_email" class="form-control" value="{{ $settings['general']['contact_email']->value ?? '' }}">
+                        <small class="text-muted">Shown publicly on the website.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Notification Email</label>
+                        <input
+                            type="email"
+                            name="notification_email"
+                            class="form-control"
+                            value="{{ $settings['general']['notification_email']->value ?? config('mail.admin.address', '') }}"
+                        >
+                        <small class="text-muted">Receives contact form emails. Falls back to admin user emails if left blank.</small>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Contact Phone</label>
