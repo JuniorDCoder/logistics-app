@@ -298,7 +298,7 @@
             $statusOrder = ['pending','picked_up','in_transit','at_customs','out_for_delivery','delivered'];
             $currentIdx  = array_search($shipment->status, $statusOrder) ?: 0;
             $progressPct = round(($currentIdx / (count($statusOrder)-1)) * 100);
-            $stepIcons   = ['fa-clock','fa-box','fa-shipping-fast','fa-stamp','fa-truck','fa-check-circle'];
+            $stepIcons   = ['fa-clock','fa-microchip','fa-shipping-fast','fa-stamp','fa-truck','fa-check-circle'];
             $mapEvents = $shipment->trackingEvents
                 ->filter(fn ($event) => filled($event->location))
                 ->sortBy('event_time')
@@ -395,7 +395,7 @@
                                     ['Weight', $shipment->weight ? $shipment->weight.' kg' : 'Not provided'],
                                     ['Dimensions', $shipment->dimensions ?: 'Not provided'],
                                     ['Declared Value', $shipment->declared_value ? '$'.number_format((float) $shipment->declared_value, 2) : 'Not provided'],
-                                    ['Estimated Delivery Time', $shipment->estimated_delivery ? $shipment->estimated_delivery->format('M d, Y') : 'Not available'],
+                                    ['Delivery Date', $shipment->estimated_delivery ? $shipment->estimated_delivery->format('M d, Y') : 'Not available'],
                                     ['Description', $shipment->description ?: 'Not provided'],
                                 ] as $row)
                                 <div>

@@ -24,7 +24,7 @@ class Shipment extends Model
 
     const STATUSES = [
         'pending'       => 'Pending',
-        'picked_up'     => 'Picked Up',
+        'picked_up'     => 'Microchipping',
         'in_transit'    => 'In Transit',
         'at_customs'    => 'At Customs',
         'out_for_delivery' => 'Out for Delivery',

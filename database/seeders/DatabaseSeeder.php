@@ -119,7 +119,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $events = [
-            ['status'=>'picked_up',  'location'=>'New York, USA',       'description'=>'Package picked up from sender.',             'event_time'=>now()->subDays(2)],
+            ['status'=>'picked_up',  'location'=>'New York, USA',       'description'=>'Microchipping completed.',             'event_time'=>now()->subDays(2)],
             ['status'=>'in_transit', 'location'=>'JFK Airport, USA',    'description'=>'Shipment departed JFK International Airport.','event_time'=>now()->subDays(1)->subHours(20)],
             ['status'=>'in_transit', 'location'=>'Heathrow Airport, UK','description'=>'Shipment arrived at Heathrow Airport.',       'event_time'=>now()->subHours(5)],
             ['status'=>'in_transit', 'location'=>'London Hub, UK',      'description'=>'Cleared customs. In transit to delivery hub.','event_time'=>now()->subHours(2)],
