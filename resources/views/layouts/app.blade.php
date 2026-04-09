@@ -464,7 +464,7 @@
                     <img src="{{ asset('storage/'.setting('logo')) }}" alt="{{ app_name() }}">
                 @else
                     <span class="logo-text">
-                        <span>WorldBridge</span> Cargo <br>
+                        <span>LogisticsTrans</span> Global <br>
                         <small style="font-size:12px;font-weight:600;letter-spacing:2px;color:var(--gray)">Solutions</small>
                     </span>
                 @endif
@@ -496,7 +496,7 @@
                         <img src="{{ asset('storage/'.setting('logo')) }}" alt="{{ app_name() }}" style="height:48px;margin-bottom:20px">
                     @else
                         <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:20px">
-                            <span style="color:var(--accent)">WorldBridge</span> Cargo <br>
+                            <span style="color:var(--accent)">LogisticsTrans</span> Global <br>
                             <span style="font-size:13px;font-weight:600;letter-spacing:3px;color:rgba(255,255,255,.5)">Solutions</span>
                         </div>
                     @endif
