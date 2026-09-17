@@ -54,6 +54,11 @@ class DatabaseSeeder extends Seeder
             // SEO
             ['key'=>'meta_description','value'=>'Professional logistics and freight services. Air freight, ocean freight, road freight and customs clearance worldwide.', 'group'=>'seo', 'type'=>'textarea', 'label'=>'Meta Description'],
             ['key'=>'meta_keywords',   'value'=>'logistics, freight, shipping, air freight, ocean freight, customs clearance', 'group'=>'seo', 'type'=>'text', 'label'=>'Meta Keywords'],
+            // Integrations
+            ['key'=>'chatwoot_enabled',        'value'=>'0', 'group'=>'integrations', 'type'=>'boolean', 'label'=>'Enable Chatwoot Live Chat'],
+            ['key'=>'chatwoot_base_url',       'value'=>'https://app.chatwoot.com', 'group'=>'integrations', 'type'=>'text', 'label'=>'Chatwoot Base URL'],
+            ['key'=>'chatwoot_website_token',  'value'=>'', 'group'=>'integrations', 'type'=>'text', 'label'=>'Chatwoot Website Token'],
+            ['key'=>'chatwoot_script_override','value'=>'', 'group'=>'integrations', 'type'=>'textarea', 'label'=>'Chatwoot Custom Embed Script'],
         ];
 
         foreach ($settings as $s) {

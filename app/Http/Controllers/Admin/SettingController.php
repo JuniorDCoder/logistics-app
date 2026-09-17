@@ -30,13 +30,33 @@ class SettingController extends Controller
             'type' => 'select',
             'label' => 'Application Timezone',
         ],
+        'chatwoot_enabled' => [
+            'group' => 'integrations',
+            'type' => 'boolean',
+            'label' => 'Enable Chatwoot Live Chat',
+        ],
+        'chatwoot_base_url' => [
+            'group' => 'integrations',
+            'type' => 'text',
+            'label' => 'Chatwoot Base URL',
+        ],
+        'chatwoot_website_token' => [
+            'group' => 'integrations',
+            'type' => 'text',
+            'label' => 'Chatwoot Website Token',
+        ],
+        'chatwoot_script_override' => [
+            'group' => 'integrations',
+            'type' => 'textarea',
+            'label' => 'Chatwoot Custom Embed Script',
+        ],
     ];
 
-    private const CHECKBOX_KEYS = ['shipment_email_notifications'];
+    private const CHECKBOX_KEYS = ['shipment_email_notifications', 'chatwoot_enabled'];
 
     public function index()
     {
-        $groups = ['general', 'social', 'homepage', 'seo'];
+        $groups = ['general', 'social', 'homepage', 'seo', 'integrations'];
         $settings = [];
         foreach ($groups as $group) {
             $settings[$group] = Setting::where('group', $group)->get()->keyBy('key');
@@ -52,6 +72,9 @@ class SettingController extends Controller
             'logo_file' => ['nullable', 'image'],
             'tracking_prefix' => ['nullable', 'alpha_num', 'max:6'],
             'timezone' => ['nullable', 'timezone'],
+            'chatwoot_base_url' => ['nullable', 'url', 'max:255'],
+            'chatwoot_website_token' => ['nullable', 'string', 'max:255'],
+            'chatwoot_script_override' => ['nullable', 'string'],
         ]);
 
         $data = $request->except(['_token', '_method', 'logo_file']);

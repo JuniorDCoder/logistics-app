@@ -609,5 +609,7 @@
     </script>
 
     @stack('scripts')
+
+    @include('partials.chatwoot')
 </body>
 </html>

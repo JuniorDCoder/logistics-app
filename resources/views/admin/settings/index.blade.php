@@ -7,7 +7,7 @@
 
     <!-- Tab nav -->
     <ul class="nav nav-tabs mb-4" style="border-bottom:2px solid #e5e7eb">
-        @foreach(['general'=>'General','social'=>'Social Media','homepage'=>'Homepage','seo'=>'SEO'] as $key => $label)
+        @foreach(['general'=>'General','social'=>'Social Media','homepage'=>'Homepage','seo'=>'SEO','integrations'=>'Integrations'] as $key => $label)
         <li class="nav-item">
             <a class="nav-link {{ $loop->first ? 'active' : '' }}" href="#{{ $key }}" data-bs-toggle="tab"
                style="font-weight:600;font-size:14px;color:#6c757d;border:none;padding:12px 20px">
@@ -159,6 +159,46 @@
                     <div class="col-12">
                         <label class="form-label">Meta Keywords</label>
                         <input type="text" name="meta_keywords" class="form-control" value="{{ $settings['seo']['meta_keywords']->value ?? '' }}" placeholder="keyword1, keyword2, ...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integrations -->
+        <div class="tab-pane fade" id="integrations">
+            <div class="form-card">
+                <div class="section-divider">Chatwoot Live Chat</div>
+                <p class="text-muted mb-3" style="font-size:14px">
+                    Adds a live chat widget to the public website, powered by <a href="https://www.chatwoot.com" target="_blank" rel="noopener">Chatwoot</a>.
+                    Get your token from your Chatwoot account under <strong>Settings → Inboxes → (your website inbox) → Configuration</strong>.
+                </p>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="chatwoot_enabled" id="chatwoot_enabled" value="1"
+                                {{ ($settings['integrations']['chatwoot_enabled']->value ?? '0') === '1' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="chatwoot_enabled">Enable Chatwoot Live Chat on the website</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Chatwoot Base URL</label>
+                        <input type="url" name="chatwoot_base_url" class="form-control"
+                               value="{{ $settings['integrations']['chatwoot_base_url']->value ?? 'https://app.chatwoot.com' }}"
+                               placeholder="https://app.chatwoot.com">
+                        <small class="text-muted">Use https://app.chatwoot.com for Chatwoot Cloud, or your own domain if self-hosted.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Website Token</label>
+                        <input type="text" name="chatwoot_website_token" class="form-control"
+                               value="{{ $settings['integrations']['chatwoot_website_token']->value ?? '' }}"
+                               placeholder="e.g. a1B2c3D4e5F6...">
+                        <small class="text-muted">The Website Token for your inbox — used together with the Base URL above.</small>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Or paste the full embed script instead</label>
+                        <textarea name="chatwoot_script_override" class="form-control" rows="6" style="font-family:monospace;font-size:13px"
+                                  placeholder="<script>&#10;  (function(d,t) { ... })(document,&quot;script&quot;);&#10;</script>">{{ $settings['integrations']['chatwoot_script_override']->value ?? '' }}</textarea>
+                        <small class="text-muted">Optional. If you paste the complete script Chatwoot gives you here, it's used as-is instead of the Base URL/Website Token fields above — useful if you need custom widget settings (locale, position, colors, etc).</small>
                     </div>
                 </div>
             </div>
