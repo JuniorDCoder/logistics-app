@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             // General
             ['key'=>'app_name',        'value'=>'IntertransitLogistics', 'group'=>'general',  'type'=>'text',     'label'=>'Application Name'],
             ['key'=>'tracking_prefix', 'value'=>'', 'group'=>'general', 'type'=>'text', 'label'=>'Tracking Number Prefix'],
+            ['key'=>'timezone',        'value'=>'UTC', 'group'=>'general', 'type'=>'select', 'label'=>'Application Timezone'],
             ['key'=>'tagline',         'value'=>'Professional Logistics Services with Seamless Process', 'group'=>'general', 'type'=>'text', 'label'=>'Tagline'],
             ['key'=>'contact_email',   'value'=>'support@intertransitlogistics.org', 'group'=>'general', 'type'=>'text', 'label'=>'Contact Email'],
             ['key'=>'notification_email', 'value'=>'support@intertransitlogistics.org', 'group'=>'general', 'type'=>'text', 'label'=>'Notification Email'],

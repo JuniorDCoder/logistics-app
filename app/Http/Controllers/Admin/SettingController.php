@@ -25,6 +25,11 @@ class SettingController extends Controller
             'type' => 'text',
             'label' => 'Tracking Number Prefix',
         ],
+        'timezone' => [
+            'group' => 'general',
+            'type' => 'select',
+            'label' => 'Application Timezone',
+        ],
     ];
 
     private const CHECKBOX_KEYS = ['shipment_email_notifications'];
@@ -46,6 +51,7 @@ class SettingController extends Controller
             'notification_email' => ['nullable', 'email'],
             'logo_file' => ['nullable', 'image'],
             'tracking_prefix' => ['nullable', 'alpha_num', 'max:6'],
+            'timezone' => ['nullable', 'timezone'],
         ]);
 
         $data = $request->except(['_token', '_method', 'logo_file']);

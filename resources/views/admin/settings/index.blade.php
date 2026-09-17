@@ -39,6 +39,20 @@
                         <small class="text-muted">Letters/numbers used at the start of new tracking numbers. Leave blank to auto-generate from the first 3 letters of the Application Name.</small>
                     </div>
                     <div class="col-md-6">
+                        <label class="form-label">Application Timezone</label>
+                        @php $currentTimezone = $settings['general']['timezone']->value ?? config('app.timezone', 'UTC'); @endphp
+                        <select name="timezone" class="form-control">
+                            @foreach(timezone_options() as $region => $zones)
+                            <optgroup label="{{ $region }}">
+                                @foreach($zones as $identifier => $label)
+                                <option value="{{ $identifier }}" {{ $currentTimezone === $identifier ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </optgroup>
+                            @endforeach
+                        </select>
+                        <small class="text-muted">Used to record every timestamp in the app (shipments, tracking events, messages, etc). Changing it only affects times recorded from now on.</small>
+                    </div>
+                    <div class="col-md-6">
                         <label class="form-label">Contact Email</label>
                         <input type="email" name="contact_email" class="form-control" value="{{ $settings['general']['contact_email']->value ?? '' }}">
                         <small class="text-muted">Shown publicly on the website.</small>
