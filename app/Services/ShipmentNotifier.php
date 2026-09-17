@@ -56,13 +56,13 @@ class ShipmentNotifier
             }
 
             try {
-                Mail::to($email)->send(new ShipmentNotification(
+                Mail::to($email)->queue(new ShipmentNotification(
                     $shipment,
                     $templateKey,
                     array_merge($base, ['recipient_name' => $party['name']])
                 ));
             } catch (\Throwable $exception) {
-                Log::warning('Failed to send shipment notification email.', [
+                Log::warning('Failed to queue shipment notification email.', [
                     'shipment_id' => $shipment->id,
                     'template' => $templateKey,
                     'recipient' => $email,

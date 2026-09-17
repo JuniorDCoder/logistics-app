@@ -75,7 +75,7 @@ class HomeController extends Controller
 
         if (count($adminRecipients) > 0) {
             try {
-                Mail::to($adminRecipients)->send(new ContactMessageNotification($contactMessage));
+                Mail::to($adminRecipients)->queue(new ContactMessageNotification($contactMessage));
             } catch (\Throwable $exception) {
                 Log::warning('Failed to send contact notification email.', [
                     'admin_recipients' => $adminRecipients,
