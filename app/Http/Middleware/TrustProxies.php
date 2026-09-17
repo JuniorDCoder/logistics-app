@@ -10,9 +10,18 @@ class TrustProxies extends Middleware
     /**
      * The trusted proxies for this application.
      *
+     * Trusting all proxies is the standard recommendation when the app sits
+     * behind a load balancer, reverse proxy, or shared-hosting proxy layer
+     * that isn't directly bypassable by the public internet (Cloudflare,
+     * cPanel/LiteSpeed, Nginx in front of PHP-FPM, etc). Without this,
+     * Laravel can't tell the original request was HTTPS, which breaks secure
+     * cookie/session handling and is a common cause of 419 "Page Expired"
+     * errors in production. Narrow this to specific IPs/CIDRs instead of '*'
+     * if the app server is ever directly reachable from the internet.
+     *
      * @var array<int, string>|string|null
      */
-    protected $proxies;
+    protected $proxies = '*';
 
     /**
      * The headers that should be used to detect proxies.

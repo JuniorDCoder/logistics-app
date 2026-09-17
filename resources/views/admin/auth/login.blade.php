@@ -42,6 +42,12 @@
             </div>
             @endif
 
+            @if(session('error'))
+            <div class="alert alert-danger border-0 rounded-3 mb-4">
+                <i class="fas fa-exclamation-triangle me-2"></i>{{ session('error') }}
+            </div>
+            @endif
+
             <form action="{{ route('admin.login.submit') }}" method="POST">
                 @csrf
                 <div class="mb-3">
