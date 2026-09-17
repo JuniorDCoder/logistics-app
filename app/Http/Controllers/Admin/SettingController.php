@@ -20,6 +20,11 @@ class SettingController extends Controller
             'type' => 'boolean',
             'label' => 'Shipment Email Notifications',
         ],
+        'tracking_prefix' => [
+            'group' => 'general',
+            'type' => 'text',
+            'label' => 'Tracking Number Prefix',
+        ],
     ];
 
     private const CHECKBOX_KEYS = ['shipment_email_notifications'];
@@ -40,12 +45,17 @@ class SettingController extends Controller
             'contact_email' => ['nullable', 'email'],
             'notification_email' => ['nullable', 'email'],
             'logo_file' => ['nullable', 'image'],
+            'tracking_prefix' => ['nullable', 'alpha_num', 'max:6'],
         ]);
 
         $data = $request->except(['_token', '_method', 'logo_file']);
 
         foreach (self::CHECKBOX_KEYS as $checkboxKey) {
             $data[$checkboxKey] = $request->boolean($checkboxKey) ? '1' : '0';
+        }
+
+        if (isset($data['tracking_prefix'])) {
+            $data['tracking_prefix'] = strtoupper((string) $data['tracking_prefix']);
         }
 
         foreach ($data as $key => $value) {

@@ -29,7 +29,10 @@ class MailTemplateSeeder extends Seeder
 <tr><td style="padding:6px 0;color:#6b7280">Service Type</td><td style="padding:6px 0">{{service_type}}</td></tr>
 <tr><td style="padding:6px 0;color:#6b7280">Estimated Delivery</td><td style="padding:6px 0">{{estimated_delivery}}</td></tr>
 </table>
-<p>You can track this shipment at any time using the tracking number above.</p>
+<div style="text-align:center;margin:24px 0">
+<a href="{{tracking_url}}" style="display:inline-block;background:#003580;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:6px;font-weight:600">Track Your Shipment</a>
+</div>
+<p>Or copy your tracking number and paste it into the tracking form on our website: <strong>{{tracking_number}}</strong></p>
 <p style="margin-top:24px">Thank you for choosing {{app_name}}.</p>
 HTML,
                 'is_active' => true,
@@ -53,7 +56,10 @@ HTML,
 <tr><td style="padding:6px 0;color:#6b7280">Destination</td><td style="padding:6px 0">{{destination}}</td></tr>
 <tr><td style="padding:6px 0;color:#6b7280">Estimated Delivery</td><td style="padding:6px 0">{{estimated_delivery}}</td></tr>
 </table>
-<p>You can track this shipment any time using tracking number {{tracking_number}}.</p>
+<div style="text-align:center;margin:24px 0">
+<a href="{{tracking_url}}" style="display:inline-block;background:#003580;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:6px;font-weight:600">Track Your Shipment</a>
+</div>
+<p>Or copy your tracking number and paste it into the tracking form on our website: <strong>{{tracking_number}}</strong></p>
 <p style="margin-top:24px">Thank you for choosing {{app_name}}.</p>
 HTML,
                 'is_active' => true,

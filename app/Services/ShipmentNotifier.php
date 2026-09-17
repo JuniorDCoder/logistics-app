@@ -39,7 +39,7 @@ class ShipmentNotifier
             'estimated_delivery' => optional($shipment->estimated_delivery)->format('F j, Y') ?: 'To be confirmed',
             'sender_name' => $shipment->sender_name,
             'receiver_name' => $shipment->receiver_name,
-            'tracking_url' => route('track'),
+            'tracking_url' => route('track', ['tracking_number' => $shipment->tracking_number]),
             'current_date' => now()->format('F j, Y'),
         ], $extra);
 

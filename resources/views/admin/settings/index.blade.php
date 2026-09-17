@@ -33,6 +33,12 @@
                         <input type="text" name="tagline" class="form-control" value="{{ $settings['general']['tagline']->value ?? '' }}">
                     </div>
                     <div class="col-md-6">
+                        <label class="form-label">Tracking Number Prefix</label>
+                        <input type="text" name="tracking_prefix" class="form-control" maxlength="6" style="text-transform:uppercase"
+                               value="{{ $settings['general']['tracking_prefix']->value ?? '' }}" placeholder="e.g. WBC">
+                        <small class="text-muted">Letters/numbers used at the start of new tracking numbers. Leave blank to auto-generate from the first 3 letters of the Application Name.</small>
+                    </div>
+                    <div class="col-md-6">
                         <label class="form-label">Contact Email</label>
                         <input type="email" name="contact_email" class="form-control" value="{{ $settings['general']['contact_email']->value ?? '' }}">
                         <small class="text-muted">Shown publicly on the website.</small>

@@ -80,6 +80,12 @@ class Shipment extends Model
 
     public static function trackingPrefix(): string
     {
+        $custom = preg_replace('/[^A-Z0-9]/', '', strtoupper((string) setting('tracking_prefix', '')));
+
+        if ($custom !== '') {
+            return substr($custom, 0, 6);
+        }
+
         $cleanName = strtoupper(preg_replace('/[^A-Z0-9]/', '', (string) app_name()));
         $prefix = substr($cleanName, 0, 3);
 
