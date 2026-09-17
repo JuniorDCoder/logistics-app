@@ -172,3 +172,33 @@
     </div>
 </form>
 @endsection
+
+@push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/11.2.4/choices.min.css">
+<style>
+    .choices { margin-bottom: 0; }
+    .choices__inner { border-radius: 8px; min-height: calc(1.5em + 1rem + 2px); padding: 0.5rem 0.75rem; }
+    .choices__list--dropdown { z-index: 1050; }
+</style>
+@endpush
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/11.2.4/choices.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var timezoneSelect = document.querySelector('select[name="timezone"]');
+        if (timezoneSelect && window.Choices) {
+            new Choices(timezoneSelect, {
+                searchEnabled: true,
+                searchPlaceholderValue: 'Search timezones...',
+                itemSelectText: '',
+                shouldSort: false,
+                searchResultLimit: 30,
+                renderChoiceLimit: -1,
+                placeholder: false,
+                fuseOptions: { threshold: 0.3 },
+            });
+        }
+    });
+</script>
+@endpush
