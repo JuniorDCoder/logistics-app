@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use App\Models\TrackingEvent;
+use App\Services\ShipmentNotifier;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
@@ -78,6 +79,8 @@ class ShipmentController extends Controller
             'event_time'  => now(),
         ]);
 
+        ShipmentNotifier::created($shipment);
+
         return redirect()->route('admin.shipments.show', $shipment)
             ->with('success', "Shipment created! Tracking #: {$shipment->tracking_number}");
     }
@@ -118,18 +121,26 @@ class ShipmentController extends Controller
             'notes'             => 'nullable|string',
         ]);
 
+        $statusChanged = $shipment->status !== $validated['status'];
+        $eventLocation = $request->input('event_location', $validated['destination']);
+        $eventDescription = $request->input('event_description', 'Shipment status updated to: ' . (Shipment::STATUSES[$validated['status']] ?? $validated['status']));
+
         // If status changed, add tracking event
-        if ($shipment->status !== $validated['status']) {
+        if ($statusChanged) {
             TrackingEvent::create([
                 'shipment_id' => $shipment->id,
                 'status'      => $validated['status'],
-                'location'    => $request->input('event_location', $validated['destination']),
-                'description' => $request->input('event_description', 'Shipment status updated to: ' . (Shipment::STATUSES[$validated['status']] ?? $validated['status'])),
+                'location'    => $eventLocation,
+                'description' => $eventDescription,
                 'event_time'  => now(),
             ]);
         }
 
         $shipment->update($validated);
+
+        if ($statusChanged) {
+            ShipmentNotifier::statusUpdated($shipment, $eventLocation, $eventDescription);
+        }
 
         return redirect()->route('admin.shipments.show', $shipment)
             ->with('success', 'Shipment updated successfully.');
@@ -152,10 +163,16 @@ class ShipmentController extends Controller
             'event_time'  => 'required|date',
         ]);
 
+        $oldStatus = $shipment->status;
+
         TrackingEvent::create(array_merge($validated, ['shipment_id' => $shipment->id]));
 
         // Update shipment status
         $shipment->update(['status' => $validated['status']]);
+
+        if ($oldStatus !== $validated['status']) {
+            ShipmentNotifier::statusUpdated($shipment, $validated['location'] ?? $shipment->destination, $validated['description']);
+        }
 
         return back()->with('success', 'Tracking event added.');
     }

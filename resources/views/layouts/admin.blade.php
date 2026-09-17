@@ -162,8 +162,12 @@
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-        <div class="brand-text"><span>IT</span>L Admin</div>
-        <small>{{ app_name() }}</small>
+        @if(setting('logo'))
+            <img src="{{ asset('storage/'.setting('logo')) }}" alt="{{ app_name() }}" style="max-height:32px;max-width:100%;margin-bottom:6px">
+        @else
+            <div class="brand-text">{{ app_name() }}</div>
+        @endif
+        <small>Admin Panel</small>
     </div>
     <nav class="sidebar-menu">
         <div class="menu-label">Main</div>
@@ -195,6 +199,9 @@
         <div class="menu-label">System</div>
         <a href="{{ route('admin.settings.index') }}" class="{{ request()->routeIs('admin.settings*') ? 'active' : '' }}">
             <i class="fas fa-cog"></i> Settings
+        </a>
+        <a href="{{ route('admin.mail-templates.index') }}" class="{{ request()->routeIs('admin.mail-templates*') ? 'active' : '' }}">
+            <i class="fas fa-envelope-open-text"></i> Mail Templates
         </a>
         <a href="{{ route('admin.profile') }}" class="{{ request()->routeIs('admin.profile') ? 'active' : '' }}">
             <i class="fas fa-user-circle"></i> My Profile

@@ -28,8 +28,12 @@
     <div class="d-flex justify-content-center">
         <div class="login-card">
             <div class="brand">
-                <div class="brand-text"><span>IT</span>L Admin</div>
-                <small>{{ app_name() }}</small>
+                @if(setting('logo'))
+                    <img src="{{ asset('storage/'.setting('logo')) }}" alt="{{ app_name() }}" style="max-height:56px;max-width:100%;margin-bottom:8px">
+                @else
+                    <div class="brand-text">{{ app_name() }}</div>
+                @endif
+                <small>Admin Panel</small>
             </div>
 
             @if($errors->any())

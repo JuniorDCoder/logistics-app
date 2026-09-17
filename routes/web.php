@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\MailTemplateController;
 
 // ─── Frontend ────────────────────────────────────────────────────────────────
 Route::get('/',        [HomeController::class, 'index'])->name('home');
@@ -70,5 +71,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Settings
         Route::get('/settings',  [SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+
+        // Mail Templates
+        Route::get('/mail-templates', [MailTemplateController::class, 'index'])->name('mail-templates.index');
+        Route::get('/mail-templates/{mailTemplate}/edit', [MailTemplateController::class, 'edit'])->name('mail-templates.edit');
+        Route::put('/mail-templates/{mailTemplate}', [MailTemplateController::class, 'update'])->name('mail-templates.update');
     });
 });

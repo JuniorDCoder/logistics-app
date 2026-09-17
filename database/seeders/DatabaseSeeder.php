@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             ['key'=>'contact_address', 'value'=>'123 Logistics Ave, Sydney, Australia', 'group'=>'general', 'type'=>'text', 'label'=>'Address'],
             ['key'=>'office_hours',    'value'=>'Mon-Sat: 08:00am - 10:00pm', 'group'=>'general', 'type'=>'text', 'label'=>'Office Hours'],
             ['key'=>'logo',            'value'=>'', 'group'=>'general', 'type'=>'image', 'label'=>'Logo'],
+            ['key'=>'shipment_email_notifications', 'value'=>'1', 'group'=>'general', 'type'=>'boolean', 'label'=>'Shipment Email Notifications'],
             // Social
             ['key'=>'facebook',        'value'=>'#', 'group'=>'social', 'type'=>'text', 'label'=>'Facebook URL'],
             ['key'=>'twitter',         'value'=>'#', 'group'=>'social', 'type'=>'text', 'label'=>'Twitter URL'],
@@ -56,6 +57,9 @@ class DatabaseSeeder extends Seeder
         foreach ($settings as $s) {
             Setting::create($s);
         }
+
+        // Mail templates
+        $this->call(MailTemplateSeeder::class);
 
         // Services
         $services = [

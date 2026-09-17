@@ -15,7 +15,14 @@ class SettingController extends Controller
             'type' => 'text',
             'label' => 'Notification Email',
         ],
+        'shipment_email_notifications' => [
+            'group' => 'general',
+            'type' => 'boolean',
+            'label' => 'Shipment Email Notifications',
+        ],
     ];
+
+    private const CHECKBOX_KEYS = ['shipment_email_notifications'];
 
     public function index()
     {
@@ -35,7 +42,11 @@ class SettingController extends Controller
             'logo_file' => ['nullable', 'image'],
         ]);
 
-        $data = $request->except(['_token', '_method']);
+        $data = $request->except(['_token', '_method', 'logo_file']);
+
+        foreach (self::CHECKBOX_KEYS as $checkboxKey) {
+            $data[$checkboxKey] = $request->boolean($checkboxKey) ? '1' : '0';
+        }
 
         foreach ($data as $key => $value) {
             Setting::updateOrCreate(

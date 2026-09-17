@@ -68,6 +68,21 @@
                             <small class="text-muted d-block mt-1">Current logo — upload new to replace</small>
                         </div>
                         @endif
+                        <small class="text-muted d-block mt-1">Used across the website, admin panel and emails wherever the logo appears.</small>
+                    </div>
+                </div>
+
+                <div class="section-divider mt-4">Shipment Email Notifications</div>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="shipment_email_notifications" id="shipment_email_notifications" value="1"
+                                {{ ($settings['general']['shipment_email_notifications']->value ?? '1') !== '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="shipment_email_notifications">
+                                Automatically email the sender and receiver when a shipment is registered or its status changes
+                            </label>
+                        </div>
+                        <small class="text-muted">Edit the wording of these emails under <a href="{{ route('admin.mail-templates.index') }}">Mail Templates</a>.</small>
                     </div>
                 </div>
             </div>
