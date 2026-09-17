@@ -54,7 +54,7 @@
                     <label class="form-label fw-semibold text-muted small text-uppercase" style="letter-spacing:.5px">Email Address</label>
                     <div class="input-icon">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" class="form-control" value="{{ old('email','admin@logistics.com') }}" required autofocus>
+                        <input type="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -76,7 +76,6 @@
             <div class="text-center mt-4">
                 <a href="{{ route('home') }}" style="color:#6c757d;font-size:13px;text-decoration:none"><i class="fas fa-arrow-left me-1"></i> Back to Website</a>
             </div>
-            <div class="text-center mt-3" style="font-size:12px;color:#9ca3af">Default: admin@logistics.com / password</div>
         </div>
     </div>
 </div>
